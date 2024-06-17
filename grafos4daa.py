@@ -293,10 +293,10 @@ def grafoMalla(m, n, dirigido=False):
     for i in range(m):
         for j in range(n):
             if i < m - 1:
-                arista_v = Arista(grafo.nodos[f"{i}-{j}"], grafo.nodos[f"{i+1}-{j}"], random.randint(1, 100))
+                arista_v = Arista(grafo.nodos[f"{i}-{j}"], grafo.nodos[f"{i+1}-{j}"], random.randint(1, 20))
                 grafo.agregar_arista(arista_v)
             if j < n - 1:
-                arista_h = Arista(grafo.nodos[f"{i}-{j}"], grafo.nodos[f"{i}-{j+1}"], random.randint(1, 100))
+                arista_h = Arista(grafo.nodos[f"{i}-{j}"], grafo.nodos[f"{i}-{j+1}"], random.randint(1, 20))
                 grafo.agregar_arista(arista_h)
     return grafo
 
@@ -309,7 +309,7 @@ def grafoErdosRenyi(n, m, dirigido=False):
     aristas_disponibles = [(i, j) for i in range(n) for j in range(i+1, n)]
     aristas_seleccionadas = random.sample(aristas_disponibles, m)
     for i, j in aristas_seleccionadas:
-        arista = Arista(nodos[i], nodos[j],  random.randint(1, 100))
+        arista = Arista(nodos[i], nodos[j],  random.randint(1, 20))
         grafo.agregar_arista(arista)
     return grafo
 
@@ -320,7 +320,7 @@ def grafoGilbert(n, p, dirigido=False):
     for i in range(n):
         for j in range(i+1, n):
             if random.random() < p:
-                arista = Arista(nodos[i], nodos[j], random.randint(1, 100))
+                arista = Arista(nodos[i], nodos[j], random.randint(1, 20))
                 grafo.agregar_arista(arista)
     return grafo
 
@@ -331,7 +331,7 @@ def grafoGeografico(n, r, dirigido=False):
     for i in range(n):
         for j in range(i+1, n):
             if random.uniform(0, 1) < r:
-                arista = Arista(nodos[i], nodos[j], random.randint(1, 100))
+                arista = Arista(nodos[i], nodos[j], random.randint(1, 20))
                 grafo.agregar_arista(arista)
     return grafo
 
@@ -344,7 +344,7 @@ def grafoBarabasiAlbert(n, d, dirigido=False):
     total_aristas = 0
     for i in range(d):
         for j in range(i+1, d):
-            arista = Arista(nodos[i], nodos[j], random.randint(1, 100))
+            arista = Arista(nodos[i], nodos[j], random.randint(1, 20))
             grafo.agregar_arista(arista)
             total_aristas += 2  # Se cuenta el doble porque es no dirigido
     for i in range(d, n):
@@ -352,7 +352,7 @@ def grafoBarabasiAlbert(n, d, dirigido=False):
         grafo.nodos[i] = Nodo(i)
         for _ in range(d):
             vecino = random.choice(nodos[:i])
-            arista = Arista(nodos[i], vecino, random.randint(1, 100))
+            arista = Arista(nodos[i], vecino, random.randint(1, 20))
             grafo.agregar_arista(arista)
             total_aristas += 1
     return grafo
@@ -382,7 +382,7 @@ def grafoDorogovtsevMendes(n, dirigido=False):
         if aristas_iniciales:
             arista_elegida = random.choice(aristas_iniciales)
             for nodo_extremo in arista_elegida:
-                arista = Arista(nodo_nuevo, nodos[nodo_extremo], random.randint(1, 100))
+                arista = Arista(nodo_nuevo, nodos[nodo_extremo], random.randint(1, 20))
                 grafo.agregar_arista(arista)
             aristas_iniciales.extend([(arista_elegida[0], i), (arista_elegida[1], i)])
         else:

@@ -4,7 +4,7 @@ import math
 
 from grafos4daa import *
 
-def spring_layout(grafo, width, height, positions, iterations=50, k=None, c=0.1, repulsion_factor=1, max_repulsive_force_distance=10.0):
+def spring_layout(grafo, width, height, positions, iterations=50, k=None, c=8, repulsion_factor=0.000005, max_repulsive_force_distance=0.00001):
     if k is None:
         k = math.sqrt((width * height) / len(grafo.nodos))
     disp = {nodo: (0, 0) for nodo in grafo.nodos}
@@ -76,7 +76,7 @@ def draw_graph(grafo, positions, width=800, height=600, delay=10, iterations_per
         draw()
         pygame.time.delay(delay)
 
-        clock.tick()
+        clock.tick(60)
 
     pygame.quit()
 
@@ -86,4 +86,4 @@ if __name__ == "__main__":
     
     width, height = 800, 600
     positions = {nodo: (random.uniform(0, width), random.uniform(0, height)) for nodo in grafo.nodos}
-    draw_graph(grafo, positions, width, height, delay=10, iterations_per_frame=1)
+    draw_graph(grafo, positions, width, height, delay=10, iterations_per_frame=10)
