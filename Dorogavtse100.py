@@ -1,12 +1,16 @@
+import os
 import pygame
 import random
 import math
+import imageio.v2 as imageio
 
 from grafos4daa import *
 
-def spring_layout(grafo, width, height, positions, iterations=50, k=None, c=8, repulsion_factor=0.000005, max_repulsive_force_distance=0.00001):
+
+
+def spring_layout(grafo, width, height, positions, iterations=50, k=None, c=5.2, repulsion_factor=1, max_repulsive_force_distance=1.0):
     if k is None:
-        k = math.sqrt((width * height) / len(grafo.nodos))
+        k = math.sqrt((width/2 * height/2) / len(grafo.nodos))
     disp = {nodo: (0, 0) for nodo in grafo.nodos}
     
     for _ in range(iterations):
@@ -44,8 +48,13 @@ def spring_layout(grafo, width, height, positions, iterations=50, k=None, c=8, r
 def draw_graph(grafo, positions, width=800, height=600, delay=10, iterations_per_frame=10):
     pygame.init()
     screen = pygame.display.set_mode((width, height))
-    pygame.display.set_caption("Grafo - Método de Resortes")
+    pygame.display.set_caption("Grafo - Dorogovtse Mendes 100")
     clock = pygame.time.Clock()
+    # Crear carpeta temporal para guardar los fotogramas
+    if not os.path.exists('frames'):
+        os.makedirs('frames')
+
+    frame_count = 0
     running = True
 
     def draw():
@@ -76,14 +85,34 @@ def draw_graph(grafo, positions, width=800, height=600, delay=10, iterations_per
         draw()
         pygame.time.delay(delay)
 
-        clock.tick(60)
+        # Guardar fotograma
+        frame_filename = f'frames/frame_{frame_count:04d}.png'
+        pygame.image.save(screen, frame_filename)
+        frame_count += 1
+
+        clock.tick()
 
     pygame.quit()
+
+    # Crear video a partir de los fotogramas
+    with imageio.get_writer('DorogovtseMendes100.mp4', fps=10) as writer:
+        for i in range(frame_count):
+            frame_filename = f'frames/frame_{i:04d}.png'
+            image = imageio.imread(frame_filename)
+            writer.append_data(image)
+
+    # Limpiar carpeta temporal
+    for i in range(frame_count):
+        frame_filename = f'frames/frame_{i:04d}.png'
+        os.remove(frame_filename)
+    os.rmdir('frames')
+
+    print("Video guardado como 'animation.mp4'")
 
 if __name__ == "__main__":
     # Generar un grafo utilizando uno de los modelos
     grafo = grafoDorogovtsevMendes(100)
     
-    width, height = 800, 600
+    width, height = 960, 800
     positions = {nodo: (random.uniform(0, width), random.uniform(0, height)) for nodo in grafo.nodos}
     draw_graph(grafo, positions, width, height, delay=10, iterations_per_frame=10)

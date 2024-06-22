@@ -95,7 +95,7 @@ def draw_graph(grafo, positions, width=800, height=600, delay=10, iterations_per
     pygame.quit()
 
     # Crear video a partir de los fotogramas
-    with imageio.get_writer('Geográfico500.mp4', fps=30) as writer:
+    with imageio.get_writer('Geográfico500.mp4', fps=10) as writer:
         for i in range(frame_count):
             frame_filename = f'frames/frame_{i:04d}.png'
             image = imageio.imread(frame_filename)
@@ -113,6 +113,6 @@ if __name__ == "__main__":
     # Generar un grafo utilizando uno de los modelos
     grafo = grafoGeografico(500, 0.05)
     
-    width, height = 800, 600
+    width, height = 960, 800
     positions = {nodo: (random.uniform(0, width), random.uniform(0, height)) for nodo in grafo.nodos}
-    draw_graph(grafo, positions, width, height, delay=10, iterations_per_frame=1)
+    draw_graph(grafo, positions, width, height, delay=10, iterations_per_frame=10)

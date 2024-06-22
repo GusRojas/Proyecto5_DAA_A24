@@ -382,7 +382,7 @@ def grafoDorogovtsevMendes(n, dirigido=False):
         if aristas_iniciales:
             arista_elegida = random.choice(aristas_iniciales)
             for nodo_extremo in arista_elegida:
-                arista = Arista(nodo_nuevo, nodos[nodo_extremo], random.randint(1, 20))
+                arista = Arista(nodo_nuevo, nodos[nodo_extremo], random.randint(1, 2))
                 grafo.agregar_arista(arista)
             aristas_iniciales.extend([(arista_elegida[0], i), (arista_elegida[1], i)])
         else:
