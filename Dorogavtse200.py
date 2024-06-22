@@ -48,7 +48,7 @@ def spring_layout(grafo, width, height, positions, iterations=50, k=None, c=5.2,
 def draw_graph(grafo, positions, width=800, height=600, delay=10, iterations_per_frame=10):
     pygame.init()
     screen = pygame.display.set_mode((width, height))
-    pygame.display.set_caption("Grafo - Dorogovtse Mendes 200")
+    pygame.display.set_caption("Grafo - Dorogovtse Mendes 500")
     clock = pygame.time.Clock()
     # Crear carpeta temporal para guardar los fotogramas
     if not os.path.exists('frames'):
@@ -95,7 +95,7 @@ def draw_graph(grafo, positions, width=800, height=600, delay=10, iterations_per
     pygame.quit()
 
     # Crear video a partir de los fotogramas
-    with imageio.get_writer('DorogovtseMendes200.mp4', fps=30) as writer:
+    with imageio.get_writer('DorogovtseMendes500.mp4', fps=30) as writer:
         for i in range(frame_count):
             frame_filename = f'frames/frame_{i:04d}.png'
             image = imageio.imread(frame_filename)
@@ -111,7 +111,7 @@ def draw_graph(grafo, positions, width=800, height=600, delay=10, iterations_per
 
 if __name__ == "__main__":
     # Generar un grafo utilizando uno de los modelos
-    grafo = grafoDorogovtsevMendes(200)
+    grafo = grafoDorogovtsevMendes(500)
     
     width, height = 800, 600
     positions = {nodo: (random.uniform(0, width), random.uniform(0, height)) for nodo in grafo.nodos}
