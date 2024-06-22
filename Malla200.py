@@ -111,7 +111,7 @@ def draw_graph(grafo, positions, width=800, height=600, delay=10, iterations_per
 
 if __name__ == "__main__":
     # Generar un grafo utilizando uno de los modelos
-    grafo = grafoMalla(50,10)
+    grafo = grafoMalla(25,20)
     
     width, height = 960, 800
     positions = {nodo: (random.uniform(0, width), random.uniform(0, height)) for nodo in grafo.nodos}
