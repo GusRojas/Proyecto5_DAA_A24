@@ -4,7 +4,6 @@ Links:
 100 nodos:
 - https://youtu.be/t5o90GLN2XQ
 - https://youtu.be/7qoDalftYWI
-- https://youtu.be/mgdkwwnwcjQ
 - https://youtu.be/CJqzbGc87uI
 - https://youtu.be/ys4rIwruYkE
 - https://youtu.be/h-DeFCMTb2Y
